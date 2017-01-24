@@ -1,7 +1,7 @@
 const html = require('choo/html')
 const css = require('sheetify')
 
-const blue = css`{
+const blue = css`:host {
 	color: blue;
 }`
 
