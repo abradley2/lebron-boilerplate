@@ -33,12 +33,19 @@ if (argv.dev) {
 			return next()
 		}
 	})
+	.on('connect', function (ev) {
+		console.log('Server running on %s', ev.uri)
+		console.log('LiveReload running on port %s', ev.livePort)
+	}).on('update', function (buffer) {
+		console.log('bundle - %d bytes', buffer.length)
+	})
 }
 
 const file = new nodeStatic.Server('./public')
 
 const server = http.createServer(function (req, res) {
 	if (apiRequest.test(req.url)) {
+		console.log('api request')
 		return api(req, res)
 	}
 	return file.serve(req, res)

@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
 	const choo = require('choo')
 	const app = choo()
-	const home = require('./views/home')
+	const home = require('./pages/home')
 
 	app.model(require('./models/home'))
 

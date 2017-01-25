@@ -10,9 +10,14 @@ function home(state, prev, send) {
 		send('home:UPDATE_MESSAGE', e.target.value)
 	}
 
+	function sendMessage() {
+		send('home:SEND_MESSAGE')
+	}
+
 	return html`<div class='container'>
 		<h3 class=${blue}>${state.home.message}</h3>
 		<input value=${state.home.message} oninput=${updateMessage}/>
+		<button onclick=${sendMessage}>Send Message</button>
 	</div>`
 }
 
