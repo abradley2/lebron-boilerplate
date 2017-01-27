@@ -1,12 +1,18 @@
 const merry = require('merry')
+// Middlware
+const session = require('./middleware/session')
+// Api
+const message = require('./api/message')
 
 module.exports = [
-	['/api/message', merry.middleware([
-		require('./middleware/session'),
-		require('./api/message')
-	])],
+	['/api/message',
+		merry.middleware([
+			session,
+			message
+		])
+	],
 	['/404', merry.notFound()],
 	['/error', function () {
-		console.log('ERROR', arguments)
+		this.log.error('ERROR', arguments)
 	}]
 ]

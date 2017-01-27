@@ -1,6 +1,5 @@
 function message(req, res, ctx, done) {
-	console.log('SENDING MESSAGE')
-	done(null, {hello: 'world'})
+	done(null, {message: 'hello world'})
 }
 
 module.exports = message

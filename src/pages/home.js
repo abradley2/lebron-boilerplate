@@ -7,7 +7,7 @@ const blue = css`:host {
 
 function home(state, prev, send) {
 	function updateMessage(e) {
-		send('home:UPDATE_MESSAGE', e.target.value)
+		send('home:UPDATE_MESSAGE', {message: e.target.value})
 	}
 
 	function sendMessage() {

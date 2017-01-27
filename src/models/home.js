@@ -7,13 +7,14 @@ module.exports = {
 	},
 	reducers: {
 		UPDATE_MESSAGE: function (state, data) {
-			return Object.assign({}, state, {message: data})
+			return Object.assign({}, state, {message: data.message})
 		}
 	},
 	effects: {
 		SEND_MESSAGE: function (state, data, send, done) {
 			const config = {
 				url: '/api/message',
+				json: true,
 				headers: {
 					'Content-Type': 'application/json'
 				}
@@ -22,8 +23,7 @@ module.exports = {
 				if (err) {
 					done(err)
 				}
-				console.log('body = ', body)
-				send('home:UPDATE_MESSAGE', body.message)
+				send('home:UPDATE_MESSAGE', body, done)
 			})
 		}
 	}
