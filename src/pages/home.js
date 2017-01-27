@@ -15,11 +15,16 @@ function home(state, prev, send) {
 		send('home:SEND_MESSAGE')
 	}
 
-	return html`<div class='container'>
+	return html`<div class='uk-container'>
 		${navbar()}
 		<h3 class=${blue}>${state.home.message}</h3>
-		<input value=${state.home.message} oninput=${updateMessage}/>
-		<button onclick=${sendMessage}>Send Message</button>
+		<input class='uk-input' value=${state.home.message} oninput=${updateMessage}/>
+		<button
+			class='uk-button uk-button-default'
+			onclick=${sendMessage}
+		>
+			Send Message
+		</button>
 	</div>`
 }
 
