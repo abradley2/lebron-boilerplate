@@ -22,6 +22,7 @@
   },
   "devDependencies": {
     "browserify": "^13.3.0",
+    "sinon": "^1.17.7",
     "tape": "^4.6.3",
     "uglifyify": "^3.0.4",
     "xo": "^0.17.1"
@@ -29,7 +30,7 @@
   "scripts": {
     "start-prod": "browserify ./src/main.js -t [sheetify/transform -u sheetify-cssnext] uglifyify -o ./public/main.bundle.js && node server --prod",
     "start-dev": "node server --dev",
-    "test": "xo"
+    "test": "xo && tape test/**/*.spec.js"
   },
   "repository": {
     "type": "git",
