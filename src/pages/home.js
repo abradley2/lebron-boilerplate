@@ -1,5 +1,6 @@
 const html = require('choo/html')
 const css = require('sheetify')
+const navbar = require('../elements/navbar')
 
 const blue = css`:host {
 	color: blue;
@@ -15,6 +16,7 @@ function home(state, prev, send) {
 	}
 
 	return html`<div class='container'>
+		${navbar()}
 		<h3 class=${blue}>${state.home.message}</h3>
 		<input value=${state.home.message} oninput=${updateMessage}/>
 		<button onclick=${sendMessage}>Send Message</button>

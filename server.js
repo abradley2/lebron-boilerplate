@@ -23,6 +23,7 @@ if (argv.dev) {
 	budo('./src/main.js:main.bundle.js', {
 		live: true,
 		port: 8000,
+		pushstate: true,
 		host: '127.0.0.1',
 		browserify: {
 			transform: 'sheetify/transform'

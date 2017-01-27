@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	app.model(require('./models/home'))
 
-	app.router(['/', home])
+	app.router([
+		['/', home],
+		['/home', home]
+	])
 
 	document.body.appendChild(app.start())
 })
