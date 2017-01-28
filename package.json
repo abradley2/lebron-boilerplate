@@ -6,7 +6,6 @@
   "dependencies": {
     "browserify": "^13.3.0",
     "budo": "^9.4.5",
-    "chokidar": "^1.6.1",
     "choo": "^4.0.3",
     "choo-log": "^3.0.0",
     "cookie-signature": "^1.0.6",
