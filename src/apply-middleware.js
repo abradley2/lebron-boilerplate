@@ -50,7 +50,6 @@ function applyWrapInitialState(app, done) {
 function applyOnStateChange(app, done) {
 	app.use({
 		onStateChange: bottleNeck(function (state) {
-			console.log('handle state change')
 			// if not in dev, only cache opt-in parts of state
 			if (!inDev()) {
 				state = Object.keys(state).reduce(function (filtered, stateKey) {
