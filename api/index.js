@@ -6,12 +6,14 @@ const mw = merry.middleware
 const api = merry()
 
 api.router([
-	['/api/message', function () {
-		mw([
-			setupCtx,
-			reqDev('./middleware/session'),
-			reqDev('./routes/message')
-		]).apply(null, arguments)
+	['/api/message', {
+		get: function () {
+			mw([
+				setupCtx,
+				reqDev('./middleware/session'),
+				reqDev('./routes/message')
+			]).apply(null, arguments)
+		}
 	}],
 	['/404', merry.notFound()],
 	['/error', function (req, res, ctx, done) {

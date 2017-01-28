@@ -24,7 +24,7 @@ if (argv.dev) {
 		],
 		middleware: function (req, res, next) {
 			if (apiRequest.test(req.url)) {
-				return require('./api')(req, res)
+				return reqDev('./api')(req, res)
 			}
 			return next()
 		}
@@ -41,9 +41,17 @@ const file = new nodeStatic.Server('./public')
 
 const server = http.createServer(function (req, res) {
 	if (apiRequest.test(req.url)) {
-		// return require('./api')(req, res)
+		return require('./api')(req, res)
 	}
 	return file.serve(req, res)
 })
 
 server.listen(prodPort)
+
+// convenience function for allowing cache busting for require
+function reqDev(module) {
+	if (argv.dev && require.cache[require.resolve(module)]) {
+		delete require.cache[require.resolve(module)]
+	}
+	return require(module) // eslint-disable-line import/no-dynamic-require
+}
