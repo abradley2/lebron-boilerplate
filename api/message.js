@@ -1,5 +1,5 @@
 function message(req, res, ctx, done) {
-	done(null, {message: 'hello world'})
+	done(null, {message: 'Hello World!'})
 }
 
 module.exports = message

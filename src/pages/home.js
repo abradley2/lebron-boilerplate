@@ -1,9 +1,10 @@
 const html = require('choo/html')
 const css = require('sheetify')
-const navbar = require('../elements/navbar')
 
-const blue = css`:host {
-	color: blue;
+css('purecss/build/pure.css')
+
+const somePadding = css`:host {
+	padding: 15px;
 }`
 
 function home(state, prev, send) {
@@ -15,12 +16,13 @@ function home(state, prev, send) {
 		send('home:SEND_MESSAGE')
 	}
 
-	return html`<div class='uk-container'>
-		${navbar()}
-		<h3 class=${blue}>${state.home.message}</h3>
-		<input class='uk-input' value=${state.home.message} oninput=${updateMessage}/>
+	return html`<div class=${somePadding}>
+		<h3>${state.home.message}</h3>
+		<fieldset class='pure-form'>
+			<input value=${state.home.message} oninput=${updateMessage}/>
+		</fieldset>
 		<button
-			class='uk-button uk-button-default'
+			class='pure-button pure-button-primary'
 			onclick=${sendMessage}
 		>
 			Send Message
