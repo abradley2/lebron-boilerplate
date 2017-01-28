@@ -1,7 +1,6 @@
 const merry = require('merry')
 
 const api = merry()
-// new comment!er
 
 api.router([
 	['/api/message', require('./routes/message')(api)],

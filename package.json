@@ -4,6 +4,7 @@
   "description": "boring as hell node, build on LeBroN",
   "main": "index.js",
   "dependencies": {
+    "browserify": "^13.3.0",
     "budo": "^9.4.5",
     "chokidar": "^1.6.1",
     "choo": "^4.0.3",
@@ -11,6 +12,7 @@
     "cookie-signature": "^1.0.6",
     "event-stream": "^3.3.4",
     "level": "^1.5.0",
+    "localforage": "^1.4.3",
     "memdb": "^1.3.1",
     "merry": "^4.1.0",
     "minimist": "^1.2.0",
@@ -22,13 +24,11 @@
     "xhr": "^2.3.3"
   },
   "devDependencies": {
-    "browserify": "^13.3.0",
     "tape": "^4.6.3",
-    "uglifyify": "^3.0.4",
     "xo": "^0.17.1"
   },
   "scripts": {
-    "start-prod": "browserify ./src/main.js -t [sheetify/transform -u sheetify-cssnext] uglifyify -o ./public/main.bundle.js && node server --prod",
+    "start-prod": "browserify ./src/main.js -t [sheetify/transform -u sheetify-cssnext] -o ./public/main.bundle.js && node server --prod",
     "start-dev": "node server --dev",
     "test": "xo && tape test/**/*.spec.js"
   },
