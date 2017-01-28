@@ -15,12 +15,12 @@ function getSessionCookie(cookieString, cookieName) {
 function session(req, res, ctx, done) {
 	let sessionId
 	let cookieVal
-	if (getSessionCookie(req.headers.cookie, 'LebronCookie')) {
+	if (req.headers.cookie && getSessionCookie(req.headers.cookie, 'LebronCookie')) {
 		cookieVal = getSessionCookie(req.headers.cookie, 'LebronCookie')
 		sessionId = cookie.unsign(cookieVal, ctx.localConfig.serverSecret)
 	} else {
 		sessionId = uuid.v1()
-		cookieVal = cookie.sign(sessionId, global.$serverSecret)
+		cookieVal = cookie.sign(sessionId, ctx.localConfig.serverSecret)
 		res.setHeader('Set-Cookie', 'LebronCookie=' + cookieVal)
 	}
 	ctx.sessionId = sessionId
