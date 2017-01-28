@@ -1,3 +1,7 @@
+const css = require('sheetify')
+
+css('purecss/build/pure.css')
+
 document.addEventListener('DOMContentLoaded', function () {
 	const choo = require('choo')
 	const app = choo()

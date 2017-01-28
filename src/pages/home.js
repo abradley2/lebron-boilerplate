@@ -1,8 +1,6 @@
 const html = require('choo/html')
 const css = require('sheetify')
 
-css('purecss/build/pure.css')
-
 const somePadding = css`:host {
 	padding: 15px;
 }`

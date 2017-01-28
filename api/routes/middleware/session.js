@@ -17,10 +17,10 @@ function session(req, res, ctx, done) {
 	let cookieVal
 	if (getSessionCookie(req.headers.cookie, 'LebronCookie')) {
 		cookieVal = getSessionCookie(req.headers.cookie, 'LebronCookie')
-		sessionId = cookie.unsign(cookieVal, 'ininthemorningofthemagicians')
+		sessionId = cookie.unsign(cookieVal, global.$serverSecret)
 	} else {
 		sessionId = uuid.v1()
-		cookieVal = cookie.sign(sessionId, 'ininthemorningofthemagicians')
+		cookieVal = cookie.sign(sessionId, global.$serverSecret)
 		res.setHeader('Set-Cookie', 'LebronCookie=' + cookieVal)
 	}
 	ctx.newSession = true
