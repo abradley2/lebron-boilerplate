@@ -32,6 +32,9 @@ function applyWrapInitialState(app, done) {
 				}
 				const localState = JSON.parse(data)
 				Object.keys(initialState).forEach(function (stateKey) {
+					if (stateKey === 'location') {
+						return
+					}
 					initialState[stateKey] = Object.assign(
 						initialState[stateKey],
 						localState[stateKey]
