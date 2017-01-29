@@ -11,7 +11,9 @@ a TODO).
 Create a local.js file at the root of this with the following:
 
 ```
-global.$serverSecret = 'PutYourSecretStringUsedToSignSecureCookiesHere'
+module.exports = {
+	serverSecret: 'PutYourSecretStringUsedToSignSecureCookiesHere'
+}
 ```
 
 `npm install` (or yarn)  
