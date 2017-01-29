@@ -11,7 +11,7 @@ api.router([
 			mw([
 				setupCtx,
 				reqDev('./middleware/session'),
-				reqDev('./routes/message')
+				reqDev('./routes/message').get
 			]).apply(null, arguments)
 		}
 	}],

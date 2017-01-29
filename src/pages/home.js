@@ -5,6 +5,10 @@ const somePadding = css`:host {
 	padding: 15px;
 }`
 
+const messageText = css`:host {
+	color: var(--color-success);
+}`
+
 function home(state, prev, send) {
 	function updateMessage(e) {
 		send('home:UPDATE_MESSAGE', {message: e.target.value})
@@ -15,7 +19,7 @@ function home(state, prev, send) {
 	}
 
 	return html`<div class=${somePadding}>
-		<h3>${state.home.message}</h3>
+		<h3 class=${messageText}>${state.home.message}</h3>
 		<fieldset class='pure-form'>
 			<input value=${state.home.message} oninput=${updateMessage}/>
 		</fieldset>
