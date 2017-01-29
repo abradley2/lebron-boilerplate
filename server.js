@@ -8,6 +8,7 @@ const devPort = 8000
 
 // API handlers
 const apiRequest = new RegExp(/^\/api\/.+$/)
+const pageRequest = new RegExp(/^\/page\/.+$/)
 
 if (argv.dev) {
 	const budo = require('budo')
@@ -41,7 +42,7 @@ if (argv.dev) {
 const file = new nodeStatic.Server('./public')
 
 const server = http.createServer(function (req, res) {
-	if (apiRequest.test(req.url)) {
+	if (apiRequest.test(req.url) || pageRequest.test(req.url)) {
 		return require('./api')(req, res)
 	}
 	return file.serve(req, res)

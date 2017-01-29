@@ -1,8 +1,11 @@
+const fs = require('fs')
+const path = require('path')
 const merry = require('merry')
 const argv = require('minimist')(process.argv.slice(2))
 const localConfig = require('../local')
 
 const mw = merry.middleware
+const notFound = merry.notFound()
 const api = merry()
 
 api.router([
@@ -15,7 +18,13 @@ api.router([
 			]).apply(null, arguments)
 		}
 	}],
-	['/404', merry.notFound()],
+	['/404', function (req, res, ctx, done) {
+		if (req.url.indexOf('/page') !== -1) {
+			return fs.createReadStream(path.join(__dirname, '../public/index.html'))
+				.pipe(res)
+		}
+		return notFound(req, res, ctx, done)
+	}],
 	['/error', function (req, res, ctx, done) {
 		api.log.error('ERROR', arguments)
 		done(null, {error: 'something happened'})

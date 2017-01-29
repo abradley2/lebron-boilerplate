@@ -10,10 +10,7 @@ function applyMiddleware(app, done) {
 			applyWrapInitialState(app, cb)
 		}
 	}, function (err) {
-		if (err) {
-			console.error(err)
-		}
-		done(app)
+		return done(err, app)
 	})
 }
 
