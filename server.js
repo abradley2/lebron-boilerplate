@@ -18,9 +18,6 @@ if (argv.dev) {
 		port: devPort,
 		host: '127.0.0.1',
 		pushstate: true,
-		browserify: {
-			transform: 'sheetify/transform'
-		},
 		dir: [
 			path.join(__dirname, 'public')
 		],

@@ -27,9 +27,15 @@
     "xo": "^0.17.1"
   },
   "scripts": {
-    "start-prod": "browserify ./src/main.js -t [sheetify/transform -u sheetify-cssnext] -o ./public/main.bundle.js && node server --prod",
+    "start-prod": "browserify ./src/main.js -o ./public/main.bundle.js && node server --prod",
     "start-dev": "node server --dev",
     "test": "xo && tape test/**/*.spec.js"
+  },
+  "browserify": {
+    "transform": "sheetify/transform"
+  },
+  "sheetify/transform": {
+    "use": "sheetify-cssnext"
   },
   "repository": {
     "type": "git",
