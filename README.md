@@ -16,16 +16,12 @@ module.exports = {
 }
 ```
 
-`npm install` (or yarn)  
+`npm install -g nodemon` (for development server)  
+`npm install` or `yarn install` (for local dependencies)  
 
 ## Commands
 
 `npm run start-dev` (runs the app in development mode)  
 `npm run start-prod` (runs the app in "production" mode)  
 
-_start-dev_ will cause the server to spin up Budo (a browserify development
-server) and also refresh the require cache for the api on any changes to the
-_/api/..._ files. Load the app on port 8000 in this mode.
-
-_start-prod_ will cause the server to spin up a node httpServer instance that
-uses the api for all api requests, and node-static for all others.
+In development, open `localhost:9966`. In production, the app is hosted on `localhost:3000`

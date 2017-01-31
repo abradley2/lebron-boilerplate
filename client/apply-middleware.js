@@ -68,10 +68,7 @@ function applyOnStateChange(app, done) {
 }
 
 function inDev() {
-	return (
-		window.location.hostname === 'localhost' ||
-		window.location.hostname === '127.0.0.1'
-	)
+	return process.env.NODE_ENV === 'development'
 }
 
 function bottleNeck(func, time) {

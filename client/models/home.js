@@ -19,7 +19,7 @@ module.exports = {
 					'Content-Type': 'application/json'
 				}
 			}
-			xhr(config, function (err, resp, body) {
+			xhr.get(config, function (err, resp, body) {
 				if (err) {
 					done(err)
 				}

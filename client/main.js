@@ -1,4 +1,5 @@
 const css = require('sheetify')
+const xhr = require('xhr')
 const applyMiddleware = require('./apply-middleware')
 
 css('purecss/build/pure.css')
@@ -21,6 +22,18 @@ document.addEventListener('DOMContentLoaded', function () {
 	applyMiddleware(app, function () {
 		startApp(app)
 	})
+})
+
+// wrap xhr methods so they automatically use local server when hosted on budo
+;['post', 'put', 'patch', 'del', 'head', 'get'].forEach(function (method) {
+	xhr[method] = (function (send) {
+		return function (config, cb) {
+			if (process.env.NODE_ENV === 'development') {
+				config.url = `http://localhost:3000${config.url}`
+			}
+			return send(config, cb)
+		}
+	})(xhr[method])
 })
 
 function startApp(app) {
