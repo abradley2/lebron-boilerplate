@@ -2,6 +2,7 @@ const http = require('http')
 const path = require('path')
 const argv = require('minimist')(process.argv.slice(2))
 const nodeStatic = require('node-static')
+const log = require('merry')().log
 
 const prodPort = 3000
 const devPort = 8000
@@ -10,9 +11,10 @@ const devPort = 8000
 const apiRequest = new RegExp(/^\/api\/.+$/)
 const pageRequest = new RegExp(/^\/page\/.+$/)
 
+// if in dev, start up budo
 if (argv.dev) {
 	const budo = require('budo')
-	// if in a dev environment, have budo serve the app
+
 	budo('./src/main.js:main.bundle.js', {
 		live: true,
 		port: devPort,
@@ -29,10 +31,10 @@ if (argv.dev) {
 		}
 	})
 	.on('connect', function (ev) {
-		console.log('Server running on %s', ev.uri)
-		console.log('LiveReload running on port %s', ev.livePort)
+		log.info('Server running on %s', ev.uri)
+		log.info('LiveReload running on port %s', ev.livePort)
 	}).on('update', function (buffer) {
-		console.log('bundle - %d bytes', buffer.length)
+		log.info('bundle - %d bytes', buffer.length)
 	})
 }
 
