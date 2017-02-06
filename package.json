@@ -30,7 +30,7 @@
     "uglifyify": "^3.0.4"
   },
   "scripts": {
-    "start-prod": "NODE_ENV=production browserify -t envify -t uglifyify client/main.js -o public/main.bundle.js && node server",
+    "start-prod": "NODE_ENV=production browserify -t envify -g uglifyify client/main.js -o public/main.bundle.js && node server",
     "start-dev": "NODE_ENV=development concurrently \"budo client/main.js:main.bundle.js --live --dir public -- -t envify\" \"nodemon server\"",
     "test": "standard && tape test/**/*.spec.js"
   },

@@ -1,7 +1,7 @@
 module.exports = {
   namespace: 'home',
   state: {
-    message: 'Chugga Chugga Choo Choo!'
+    message: 'Choo-choo!'
   },
   reducers: {
     UPDATE_MESSAGE: function (state, data) {
