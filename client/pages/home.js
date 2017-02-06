@@ -14,23 +14,9 @@ function home(state, prev, send) {
 		send('home:UPDATE_MESSAGE', {message: e.target.value})
 	}
 
-	function sendMessage() {
-		send('home:SEND_MESSAGE')
-	}
-
-	return html`<div class=${somePadding + ' pure-form'}>
+	return html`<div class=${somePadding}>
 		<h3 class=${messageText}>${state.home.message}</h3>
-		<a href='/page/about'>About</a>
-		<div></div>
-		<fieldset class='pure-form'>
-			<input value=${state.home.message} oninput=${updateMessage}/>
-		</fieldset>
-		<button
-			class='pure-button pure-button-primary'
-			onclick=${sendMessage}
-		>
-			Send Message
-		</button>
+		<input type='text' value=${state.home.message} oninput=${updateMessage} />
 	</div>`
 }
 

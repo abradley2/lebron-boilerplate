@@ -1,9 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const merry = require('merry')
-const localConfig = require('../local')
-// middleware
-const session = require('./middleware/session')
 // routes
 const message = require('./routes/message')
 
@@ -15,7 +12,6 @@ api.router([
 	['/api/message', {
 		get: mw([
 			setupCtx,
-			session,
 			message.get
 		])
 	}],
@@ -32,9 +28,9 @@ api.router([
 	}]
 ])
 
+// set stuff that should always be on the ctx object passed to routes and middleware
 function setupCtx(req, res, ctx, done) {
 	Object.assign(ctx, {
-		localConfig: localConfig,
 		log: api.log
 	})
 	return done()

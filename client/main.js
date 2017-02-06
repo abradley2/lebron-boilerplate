@@ -1,14 +1,12 @@
 const css = require('sheetify')
 const xhr = require('xhr')
-const applyMiddleware = require('./apply-middleware')
 
-css('purecss/build/pure.css')
+css('tachyons')
 css('./styles/base.css')
 
 document.addEventListener('DOMContentLoaded', function () {
 	const choo = require('choo')
 	const home = require('./pages/home')
-	const about = require('./pages/about')
 
 	const app = choo()
 
@@ -16,13 +14,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	app.router([
 		['/', home],
-		['/page/about', about]
+		['/pages/home', home]
 	])
 
-	applyMiddleware(app, function () {
-		startApp(app)
-	})
+	startApp(app)
 })
+
+if (process.env.NODE_ENV !== 'production') {
+const log = require('choo-log')
+app.use(log())
+}
 
 // wrap xhr methods so they automatically use local server when hosted on budo
 ;['post', 'put', 'patch', 'del', 'head', 'get'].forEach(function (method) {
