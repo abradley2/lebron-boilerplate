@@ -52,13 +52,5 @@
   "bugs": {
     "url": "https://github.com/abradley2/tiny-node-stack-starter/issues"
   },
-  "homepage": "https://github.com/abradley2/tiny-node-stack-starter#readme",
-  "xo": {
-    "envs": [
-      "node",
-      "commonjs",
-      "browser"
-    ],
-    "semicolon": false
-  }
+  "homepage": "https://github.com/abradley2/tiny-node-stack-starter#readme"
 }

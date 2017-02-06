@@ -5,38 +5,38 @@ css('tachyons')
 css('./styles/base.css')
 
 document.addEventListener('DOMContentLoaded', function () {
-	const choo = require('choo')
-	const home = require('./pages/home')
+  const choo = require('choo')
+  const home = require('./pages/home')
 
-	const app = choo()
+  const app = choo()
 
-	app.model(require('./models/home'))
+  app.model(require('./models/home'))
 
-	app.router([
-		['/', home],
-		['/pages/home', home]
-	])
+  app.router([
+    ['/', home],
+    ['/pages/home', home]
+  ])
 
-	startApp(app)
+  if (process.env.NODE_ENV !== 'production') {
+    const log = require('choo-log')
+    app.use(log())
+  }
+
+  startApp(app)
 })
-
-if (process.env.NODE_ENV !== 'production') {
-const log = require('choo-log')
-app.use(log())
-}
 
 // wrap xhr methods so they automatically use local server when hosted on budo
 ;['post', 'put', 'patch', 'del', 'head', 'get'].forEach(function (method) {
-	xhr[method] = (function (send) {
-		return function (config, cb) {
-			if (process.env.NODE_ENV === 'development') {
-				config.url = `http://localhost:3000${config.url}`
-			}
-			return send(config, cb)
-		}
-	})(xhr[method])
+  xhr[method] = (function (send) {
+    return function (config, cb) {
+      if (process.env.NODE_ENV === 'development') {
+        config.url = `http://localhost:3000${config.url}`
+      }
+      return send(config, cb)
+    }
+  })(xhr[method])
 })
 
-function startApp(app) {
-	document.body.appendChild(app.start())
+function startApp (app) {
+  document.body.appendChild(app.start())
 }
