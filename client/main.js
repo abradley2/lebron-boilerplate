@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   app.router([
     ['/', home],
-    ['/pages/home', home]
+    ['/page/home', home]
   ])
 
   if (process.env.NODE_ENV !== 'production') {
