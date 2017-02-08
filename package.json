@@ -13,7 +13,6 @@
     "run-auto": "^2.0.0",
     "run-series": "^1.1.4",
     "tachyons": "^4.6.2",
-    "uuid": "^3.0.1",
     "xhr": "^2.3.3"
   },
   "devDependencies": {
