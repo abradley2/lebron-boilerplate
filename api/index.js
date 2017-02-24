@@ -1,8 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const merry = require('merry')
-// routes
-const message = require('./routes/message')
 
 const mw = merry.middleware
 const notFound = merry.notFound()
@@ -12,7 +10,9 @@ api.router([
   ['/api/message', {
     get: mw([
       setupCtx,
-      message.get
+      function (req, res, ctx, done) {
+        done(null, {message: 'Hello!'})
+      }
     ])
   }],
   ['/404', function (req, res, ctx, done) {

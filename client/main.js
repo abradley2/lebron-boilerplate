@@ -2,31 +2,28 @@ const css = require('sheetify')
 const xhr = require('xhr')
 
 css('tachyons')
-css('./styles/base.css')
 
-document.addEventListener('DOMContentLoaded', function () {
-  const choo = require('choo')
-  const home = require('./pages/home')
+const choo = require('choo')
+const app = choo()
+const home = require('./pages/home')(app)
 
-  const app = choo()
 
-  app.model(require('./models/home'))
+app.router([
+  ['/', home],
+  ['/page/home', home]
+])
 
-  app.router([
-    ['/', home],
-    ['/page/home', home]
-  ])
+if (process.env.NODE_ENV !== 'production') {
+  const log = require('choo-log')
+  app.use(log())
+}
 
-  if (process.env.NODE_ENV !== 'production') {
-    const log = require('choo-log')
-    app.use(log())
-  }
-
-  startApp(app)
-})
+startApp(app)
 
 // wrap xhr methods so they automatically use local server when hosted on budo
-;['post', 'put', 'patch', 'del', 'head', 'get'].forEach(function (method) {
+const methods = ['post', 'put', 'patch', 'del', 'head', 'get']
+
+methods.forEach(function (method) {
   xhr[method] = (function (send) {
     return function (config, cb) {
       if (process.env.NODE_ENV === 'development') {
