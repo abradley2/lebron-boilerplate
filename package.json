@@ -1,11 +1,12 @@
 {
-  "name": "lebron-boilerplate",
+  "name": "lebron-stack",
   "version": "1.0.0",
-  "description": "boring as hell node, built on LeBroN",
+  "description": "There's no need to be mean :)",
   "main": "index.js",
   "dependencies": {
     "choo": "^4.0.3",
     "choo-log": "^3.0.0",
+    "icepick": "^1.3.0",
     "level": "^1.5.0",
     "memdb": "^1.3.1",
     "merry": "^4.7.1",
@@ -29,7 +30,7 @@
   "scripts": {
     "start-prod": "NODE_ENV=production concurrently \"browserify -t envify -g uglifyify client/main.js -o public/main.bundle.js\" \"node server\"",
     "start-dev": "NODE_ENV=development concurrently \"budo client/main.js:main.bundle.js --live --dir public -- -t envify\" \"nodemon server\"",
-    "test": "standard && tape test/**/*.spec.js"
+    "test": "NODE_ENV=test concurrently \"standard\" \"budo test/main.js\""
   },
   "browserify": {
     "transform": [

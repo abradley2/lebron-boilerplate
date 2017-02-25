@@ -1,7 +1,8 @@
 const html = require('choo/html')
 const css = require('sheetify')
+const i = require('icepick')
 
-const somePadding = css`
+const styles = css`
   :host {
     padding: 15px;
   }
@@ -14,17 +15,17 @@ const homeModel = {
   },
   reducers: {
     UPDATE_MESSAGE: function (state, data) {
-      return Object.assign({}, state, {message: data.message})
+      return i.set(state, 'message', data)
     }
   }
 }
 
 function homeView (state, prev, send) {
   function updateMessage (e) {
-    send('home:UPDATE_MESSAGE', {message: e.target.value})
+    send('home:UPDATE_MESSAGE', e.target.value)
   }
 
-  return html`<div class=${somePadding}>
+  return html`<div class=${styles}>
     <h3>${state.home.message}</h3>
     <input type='text' value=${state.home.message} oninput=${updateMessage} />
   </div>`

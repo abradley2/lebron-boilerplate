@@ -7,33 +7,26 @@ const choo = require('choo')
 const app = choo()
 const home = require('./pages/home')(app)
 
-
 app.router([
   ['/', home],
-  ['/page/home', home]
+  ['/home', home]
 ])
 
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   const log = require('choo-log')
   app.use(log())
-}
 
-startApp(app)
+  // wrap xhr methods so they automatically use local server when hosted on budo
+  const methods = ['post', 'put', 'patch', 'del', 'head', 'get']
 
-// wrap xhr methods so they automatically use local server when hosted on budo
-const methods = ['post', 'put', 'patch', 'del', 'head', 'get']
-
-methods.forEach(function (method) {
-  xhr[method] = (function (send) {
-    return function (config, cb) {
-      if (process.env.NODE_ENV === 'development') {
+  methods.forEach(function (method) {
+    xhr[method] = (function (send) {
+      return function (config, cb) {
         config.url = `http://localhost:3000${config.url}`
       }
       return send(config, cb)
-    }
-  })(xhr[method])
-})
-
-function startApp (app) {
-  document.body.appendChild(app.start())
+    })(xhr[method])
+  })
 }
+
+document.body.appendChild(app.start())
